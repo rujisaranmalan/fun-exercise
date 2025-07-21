@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "target": "es2017",    // Or "es2015"
+    "lib": ["ES2017", "dom"],
+    "strict": true
+}
+}
