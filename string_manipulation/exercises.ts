@@ -162,7 +162,7 @@ console.log("🚀 ~ removeApple ~ removeApple:", removeApple(["apple","banana","
 ///////// Remove Duplicate /////////
 function removeDuplicates(arr: string[]): string[] {
     // your code here
-  let result = [];
+  let result: string[] = [];
   for (const duplicate of arr){
     if(!result.includes(duplicate)){
       console.log("🚀 ~ removeDuplicates ~ result:", result)
