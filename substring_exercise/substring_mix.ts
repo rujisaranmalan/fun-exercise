@@ -654,7 +654,7 @@ function groupAnagrams(words: string[]): string[][] {
 
 console.log("🚀 ~ groupAnagrams ~ result:", groupAnagrams(["eat","tea","tan","ate","nat","bat"]));
 
-function groupByFirstLetter(words: string[]) {
+function groupByFirstLetters(words: string[]) {
     // Your code here!
     let trace = new Map()
     for(let word of words){
@@ -669,7 +669,7 @@ function groupByFirstLetter(words: string[]) {
     return Array.from(trace.values())
  
 }
-console.log(groupByFirstLetter(["Apple", "avocado", "Banana", "blueberry", "Cherry", "cantaloupe", "apricot"]));
+console.log(groupByFirstLetters(["Apple", "avocado", "Banana", "blueberry", "Cherry", "cantaloupe", "apricot"]));
 
 function groupByLastLetter(words: string[]): string[][] {
     // Your code here!
@@ -686,4 +686,130 @@ function groupByLastLetter(words: string[]): string[][] {
     return Array.from(trace.values())
 }
 console.log(groupByLastLetter(["Apple", "pie", "crumble", "banana", "cake", "lake", "avocado"]));
+
+///// Map sort by its length /////
+
+function groupByLength(words: string[]): string[][] {
+    // Your code here!
+    let someMap = new Map<number, string[]>()
+
+    for (let word of words){
+        let eachLength = word.length
+        if(!someMap.has(eachLength)){
+            someMap.set(eachLength,[])
+        }
+        someMap.get(eachLength)!.push(word)
+    }
+
+    return Array.from(someMap.values())
+}
+
+console.log(groupByLength(["cat", "dogs", "apple", "hi", "sun", "moon", "star"]));
+
+// Level A: Group by Vowel Count
+// 1. You need a helper function to count the vowels in a word.
+// Which letters are vowels? (Hint: "aeiou" — case-insensitive)
+
+// Use a loop, regex, or Array methods—your call!
+
+// 2. Use your trusty grouping pattern:
+// The key is the number of vowels in the word.
+
+function countVowels(word: string): number {
+
+  // Your code here!
+  const re = /[aeiou]/i
+  let count = 0
+  for(let i = 0; i < word.length; i++){
+    if(word[i].match(re)){
+        count++
+    }
+  
+
+  
+}
+    return count
+}
+
+console.log("🚀 ~ countVowels ~ countVowels:", countVowels("aaabbbccceee"))
+
+
+
+function groupByVowelCount(words: string[]): string[][] {
+  let map = new Map<number, string[]>();
+  
+  for (let word of words) {
+    // Use countVowels to get the key
+    let countVowel = countVowels(word)
+    if(!map.has(countVowel)){
+        map.set(countVowel,[])
+    }
+    map.get(countVowel)!.push(word)
+    // If no group for this count, make a new array
+    // Push word into group
+  }
+  // Return grouped arrays
+  return Array.from(map.values());
+}
+
+console.log(groupByVowelCount(["apple", "banana", "sky", "queue", "book", "eye", "gym", "loop"]));
+
+
+function groupByFirstLastCombo(words: string[]): string[][] {
+    let map = new Map<string, string[]>();
+    for (let word of words) {
+        // Your turn!
+        // 1. Get first and last letter (lowercase)
+        let toLowerCase = word.toLowerCase()
+        let firstLetter = toLowerCase[0]
+        let lastLetter = toLowerCase[toLowerCase.length - 1]
+        let key = `${firstLetter}-${lastLetter}`
+
+        if(!map.has(key)){
+            map.set(key,[])
+        }
+           
+        // 2. Make a key like "a-a"
+        // 3. Use same Map pattern as before
+        map.get(key)!.push(word)
+
+    }
+    return Array.from(map.values());
+}
+
+console.log(
+    groupByFirstLastCombo([
+    "Anna", "Alma", "arena", "beta", "Alaska", "alpha", "gamma", "Ada"
+  ])
+);
+
+// Challenge: Group Words by Unique Sorted Letters
+// Task:
+// Group together all words that have the same set of unique letters, regardless of order or frequency.
+
+// Example:
+
+// "east", "seat", and "teas" should be grouped together (unique set is a, e, s, t).
+
+// "state" would not join, since its set is a, e, s, t but it has two t’s and an extra a—but we only care about unique letters.
+
+function groupByUniqueSortedLetters(words: string[]): string[][] {
+    
+    let map = new Map<string, string[]>();
+    for (let word of words) {
+        // Your turn!
+        let lower = word.toLowerCase()
+        let uniqueChars = Array.from(new Set(lower.split("")))
+        let sorting = uniqueChars.sort().join("")
+
+        if(!map.has(sorting)){
+            map.set(sorting,[])
+        }
+        map.get(sorting)?.push(word)
+
+    }
+    return Array.from(map.values());
+}
+
+console.log("🚀 ~ groupByUniqueSortedLetters ~ groupByUniqueSortedLetters:", groupByUniqueSortedLetters(["east", "seat", "teas", "tea", "state", "eat", "ate", "eta"]))
 
