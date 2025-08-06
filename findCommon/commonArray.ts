@@ -19,7 +19,7 @@ function longestCommonSubstring(words: string[]) {
 }
 
 
-function cutCommonSubstring(words: string[]) {
+function cutCommonSubstring(words: string[]): string[] {
    
     const common = longestCommonSubstring(words);
     if (!common) return words; // no common part found

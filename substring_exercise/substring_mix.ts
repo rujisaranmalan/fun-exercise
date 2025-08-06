@@ -520,8 +520,7 @@ function runLengthEncode(str: string): string {
             console.log("🚀 ~ runLengthEncode ~ trackCount:", trackCount)
             continue
         }
-        else{
-            
+        else{            
             result.push(str[i])
             result.push(trackCount)
             trackCount = 1
